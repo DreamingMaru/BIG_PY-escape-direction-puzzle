@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport"
+        content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./big_py_escape_room.css">
+    <script src="./big_py_escape_room.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&amp;display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script>
+        var audio_click = new Audio('click.mp3');
+        audio_click.src = "./sound/click.mp3";
+        var audio_success = new Audio('success.mp3');
+        audio_success.src = "./sound/success.mp3";
+        var audio_fail = new Audio('fail.mp3');
+        audio_fail.src = "./sound/fail.mp3";
+    </script>
+</head>
+
+<body>
+    <header>
+        <img src="./resources/320082.png" style="width:30%; margin-top: 30px;">
+    </header>
+
+    <form style="margin-left: 10%; margin-right: 10%; margin-top: 10%;" id="form">
+        <button onclick="audio_click.play();" style="width:25%; background-color: white; border-style: none; font-size: 0%;" id="down" value="down"><img src="./resources/down.png" style="box-shadow: 3px 6px 0 rgb(0 0 0 / 50%); border-radius: 50%;"
+                alt="" style="width:100%;">d</button>
+        <button onclick="audio_click.play();" style="width:25%; background-color: white; border-style: none; font-size: 0%;" id="up"><img src="./resources/up.png" alt="" style="box-shadow: 3px 6px 0 rgb(0 0 0 / 50%); border-radius: 50%;"
+                style="width:100%;">u</button>
+        <button onclick="audio_click.play();" style="width:25%; background-color: white; border-style: none; font-size: 0%;" id="left"><img src="./resources/left.png" alt="" style="box-shadow: 3px 6px 0 rgb(0 0 0 / 50%); border-radius: 50%;"
+                style="width:100%" ;>l</button>
+        <button onclick="audio_click.play();" style="width:25%; background-color: white; border-style: none; font-size: 0%;" id="right"><img src="./resources/right.png" alt="" style="box-shadow: 3px 6px 0 rgb(0 0 0 / 50%); border-radius: 50%;"
+                style="width:100%" ;>r</button>
+        <div class="input-group flex-nowrap" style="width: 228px; margin-top: 50px;">
+            <button onclick="audio_click.play()" class="btn btn-secondary" id="clear"
+                style="width: 150px; margin-left: 251px; margin-right: 10px; font-size: 40px;">Clear</button>
+                <button class="btn btn-secondary" id="enter" style="width: 150px; font-size: 40px;">Enter</button>
+        </div>
+        <input readonly="" type="text" id="result" class="form-control" aria-label="Username"
+            style="margin-left: -8px; display: none;" aria-describedby="addon-wrapping">
+            
+
+        <br>
+
+        
+
+        <script>
+            const $result = document.querySelector('#result');
+            const $solution = document.querySelector('#solution');
+            const $form = document.querySelector('#form');
+
+
+
+
+            // document.querySelector('#down').addEventListener('click', onClick)
+            $('#down').click(function () {
+                $result.value += this.textContent
+            })
+            $('#up').click(function () {
+                $result.value += this.textContent
+            })
+            $('#left').click(function () {
+                $result.value += this.textContent
+            })
+            $('#right').click(function () {
+                $result.value += this.textContent
+            })
+
+            $('#enter').click(function () {
+                if ($result.value === 'ldlu') {
+                    //$solution.style.display = 'block'
+                    audio_success.play();
+                    document.querySelector("#down").style.display = 'none';
+                    document.querySelector("#right").style.display = 'none';
+                    document.querySelector("#left").style.display = 'none';
+                    document.querySelector("#up").style.display = 'none';
+                    document.querySelector('#enter').style.display = 'none';
+                    document.querySelector('#clear').style.display = 'none';
+                    successLogin()
+
+                } else {
+                    audio_fail.play();
+                    alert('삐이이이------')
+                    $result.value === '';
+
+                }
+                $result.value = '';
+            })
+
+            $('#clear').click(function () {
+                $result.value = '';
+            })
+
+
+
+
+            $form.addEventListener('submit', () => {
+                event.preventDefault(); // 기본동작 막기 (새로고침 막기) -> why? answer값 초기화 방지
+
+
+            })
+
+        </script>
+
+
+
+    </form>
+
+
+</html>
